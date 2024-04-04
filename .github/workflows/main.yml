@@ -18,7 +18,7 @@ jobs:
       run: curl -o app.war http://localhost:9081/repository/maven-snapshots/Spring3HibernateApp/Spring3HibernateApp/1.8-SNAPSHOT/Spring3HibernateApp-1.8-20240404.113110-1.war
 
     - name: Deploy WAR file to Tomcat webapps directory
-      run: cp app.war /var/lib/tomcat9/webapps/
+      run: sudo cp app.war /var/lib/tomcat9/webapps/
 
     - name: Restart Tomcat if needed
       run: systemctl restart tomcat
