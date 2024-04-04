@@ -12,8 +12,17 @@ jobs:
 
     runs-on: self-hosted
 
+    permissions:
+      sudo: enabled
+
     steps:
     - uses: actions/checkout@v2
 
-    - name: Build with Maven
-      run: mvn clean package
+    - name: Download .war file from Nexus repository
+      run: curl -o app.war http://localhost:9081/repository/maven-snapshots/Spring3HibernateApp/Spring3HibernateApp/1.8-SNAPSHOT/Spring3HibernateApp-1.8-20240404.113110-1.war
+
+    - name: Deploy WAR file to Tomcat webapps directory
+      run: sudo cp app.war /var/lib/tomcat9/webapps/
+
+    - name: Restart Tomcat if needed
+      run: sudo systemctl restart tomcat
