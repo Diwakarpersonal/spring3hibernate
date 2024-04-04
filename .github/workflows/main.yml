@@ -11,10 +11,7 @@ jobs:
   build:
 
     runs-on: self-hosted
-
-    permissions:
-      sudo: enabled
-
+    
     steps:
     - uses: actions/checkout@v2
 
