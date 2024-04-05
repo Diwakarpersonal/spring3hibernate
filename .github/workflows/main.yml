@@ -1,10 +1,10 @@
-name: Java CI with Maven
+name: Java CD with Maven
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
   workflow_dispatch:
 
 jobs:
@@ -22,3 +22,9 @@ jobs:
 
     - name: Restart Tomcat if needed
       run: sudo systemctl restart tomcat9.service
+
+    - name: Upload artifact to GitHub Packages
+      uses: actions/upload-artifact@v2
+      with:
+        name: app
+        path: app.war
