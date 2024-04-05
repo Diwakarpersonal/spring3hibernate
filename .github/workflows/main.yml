@@ -15,8 +15,8 @@ jobs:
     steps:
 
     - name: Download artifact from GitHub Packages
-      uses: actions/download-artifact@v2
+      uses: actions/download-artifact@v3
       with:
-        name: app
+        name: app.zip
         path: downloaded_artifact
-      if: github.run_id == '11'
+        run-id: 11
