@@ -17,11 +17,6 @@ jobs:
     - name: Download artifact from GitHub Packages
       uses: actions/download-artifact@v2
       with:
-        name: app
+        name: app.zip
         path: downloaded_artifact
 
-    - name: Deploy WAR file to Tomcat webapps directory
-      run: sudo cp downloaded_artifact/app.war /var/lib/tomcat9/webapps/
-
-    - name: Restart Tomcat if needed
-      run: sudo systemctl restart tomcat9.service
