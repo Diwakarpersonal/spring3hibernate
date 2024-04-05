@@ -13,14 +13,12 @@ jobs:
     runs-on: self-hosted
     
     steps:
-    - name: Echo GitHub Token
-      run: echo ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Download artifact from GitHub Packages
-      uses: actions/download-artifact@v3
-      with:
-        name: app
-        github-token: ${{ secrets.GITHUB_TOKEN }} 
-        repository: Diwakarpersonal/spring3hibernate
-        path: downloaded_artifact
-        run-id: 8573707252
+    - name: Download .war file from repository
+      run: curl -o https://github.com/Diwakarpersonal/spring3hibernate/actions/runs/8573707252/artifacts/1389225476
+
+    - name: Deploy WAR file to Tomcat webapps directory
+      run: sudo cp app.war /var/lib/tomcat9/webapps/
+
+    - name: Restart Tomcat if needed
+      run: sudo systemctl restart tomcat9.service
