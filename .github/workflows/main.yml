@@ -15,8 +15,9 @@ jobs:
     steps:
 
     - name: Download artifact from GitHub Packages
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
-        name: app
-        path: downloaded_artifact
-        run-id: 11
+       name: app
+       github-token: ${{ secrets.GITHUB_TOKEN }}
+       path: downloaded_artifact
+       run-id: 11
