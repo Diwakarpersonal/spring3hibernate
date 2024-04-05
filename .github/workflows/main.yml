@@ -14,17 +14,14 @@ jobs:
     
     steps:
 
-    - name: Download .war file from Nexus repository
-      run: curl -o app.war http://localhost:9081/repository/maven-snapshots/Spring3HibernateApp/Spring3HibernateApp/1.8-SNAPSHOT/Spring3HibernateApp-1.8-20240404.113110-1.war
+    - name: Download artifact from GitHub Packages
+      uses: actions/download-artifact@v2
+      with:
+        name: app
+        path: downloaded_artifact
 
     - name: Deploy WAR file to Tomcat webapps directory
-      run: sudo cp app.war /var/lib/tomcat9/webapps/
+      run: sudo cp downloaded_artifact/app.war /var/lib/tomcat9/webapps/
 
     - name: Restart Tomcat if needed
       run: sudo systemctl restart tomcat9.service
-
-    - name: Upload artifact to GitHub Packages
-      uses: actions/upload-artifact@v2
-      with:
-        name: app
-        path: app.war
