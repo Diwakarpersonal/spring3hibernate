@@ -11,14 +11,10 @@ jobs:
   build:
 
     runs-on: self-hosted
-    
     steps:
-
-    - name: Download .war file from repository
-      run: curl -o https://github.com/Diwakarpersonal/spring3hibernate/actions/runs/8573707252/artifacts/1389225476
-
-    - name: Deploy WAR file to Tomcat webapps directory
-      run: sudo cp app.war /var/lib/tomcat9/webapps/
-
-    - name: Restart Tomcat if needed
-      run: sudo systemctl restart tomcat9.service
+    - uses: actions/download-artifact@v4
+      with:
+        name: app.war
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        repository: ${{ github.repository }}
+        run-id: 8573707252
